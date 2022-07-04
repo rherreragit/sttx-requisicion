@@ -1,0 +1,72 @@
+.example-full-width {
+    width: 100%;
+  }
+
+.principal {
+    margin-top: -90px;
+  }
+
+  .sttx-boldfont {
+     text-align: center;
+  }
+
+  .content-wrapper {
+    margin-left: 5px;
+    
+  }
+
+  #btn-agregar {
+    top: 10px; 
+  }
+  
+  #btn-guardar {
+    top: 25px;
+    left: 25px;
+
+  } 
+
+  .grid {
+    margin-right: 10px;
+    margin-left: 40px;
+  }
+
+  #Seccion_1, #Seccion_2 {
+    margin-left: 0px;
+  }
+
+  #Seccion_3 {
+    margin-left: 0px;
+  }
+
+  .alinea {  
+    margin-top: -8px;
+  }
+
+  
+ .titleGrid {
+  width: 100%;
+  background-color:#3f51b5;
+  color: white;
+  text-align: center;
+ } 
+
+
+ #Errores {
+  margin-top: 20px;
+ }
+
+ #color {
+  color: red;
+}
+
+.k-grid tr.warning { background-color:beige; color: red; }
+.k-grid tr.normal { background-color: white; color: black; }
+
+.k-icon {
+    font-size: 28px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+}
+

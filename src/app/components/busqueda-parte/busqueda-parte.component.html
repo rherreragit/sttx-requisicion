@@ -1,0 +1,61 @@
+
+<form class="busquedaParte">
+    <mat-form-field class="inputParte">
+        <input [(ngModel)]="parteSeleccionada" matInput placeholder="Seleccione una Parte" name="parte"  (blur)="regresarParte()">
+        <button matSuffix mat-raised-button color="primary" data-toggle="modal" [attr.data-target]="'#frmparte'+ Instancia">Buscar</button>
+      </mat-form-field>
+</form>
+
+  <div [attr.id]="'frmparte'+ Instancia" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="frmbusqueda"></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="idmenu" value="">
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group" id="formularionuevosubmenu">
+                            <label><b>Buscar:</b></label>
+                            <input class="form-control" placeholder="Escribe aqui lo que desees Buscar" id="txtBuscaParte" type="text" name="txtBuscaParte" (keyup)="filtrar($event)" 
+                            [(ngModel)]="filtro"/>
+                            <div id="gridparte">
+                                <kendo-grid 
+                                [data]="vistaGrid" 
+                                [height]="400"
+                                [pageable]="true"
+                                [pageSize]="pageSize"
+                                [skip]="skip"
+                                [filter]="state.filter"
+                                (pageChange)="pageChange($event)"
+                                >
+                                    <kendo-grid-column field="parte_int" title="Codigo" width="100">
+                                    </kendo-grid-column>
+                                    <kendo-grid-column field="parte_desc" title="Descripcion" width="200">
+                                    </kendo-grid-column>
+                                    <kendo-grid-column field="um" title="UM" width="60">
+                                    </kendo-grid-column>
+                                    <kendo-grid-column field="ln_prod" title="Ln Prod" width="60">
+                                    </kendo-grid-column>
+                                    <kendo-grid-column field="ln_prod_desc" title="Linea Descripcion" width="140">
+                                    </kendo-grid-column>
+                                    <kendo-grid-column field="estatus" title="Status"  width="80">
+                                    </kendo-grid-column>                                   
+                                    <kendo-grid-command-column title="Acciones" width="110">
+                                        <ng-template kendoGridCellTemplate let-dataItem>
+                                            <button class="k-primary" (click)="seleccionarParte(dataItem)" data-dismiss="modal">Seleccionar</button>
+                                        </ng-template>
+                                    </kendo-grid-command-column>
+                                </kendo-grid>    
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

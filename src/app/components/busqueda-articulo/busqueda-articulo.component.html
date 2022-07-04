@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-sm-6 col-md-6 col-lg-12">
+      <div class="form-group">
+          <div class="row">
+              <div class="col-md-4 col-lg-6">
+                  <mat-form-field class="inputArticulo">                       
+                       <input matInput [(ngModel)]="articuloSeleccionado" (keyup)="actualizarArticulo(txtArticulo.value.toUpperCase())" #txtArticulo placeholder="Articulo" name="txtArticulo" [disabled]="bloqueado_1">
+                       <button *ngIf="articuloSeleccionado" matSuffix mat-raised-button color="primary" data-toggle="modal" (click)="cargarArticulo()" [disabled]="bloqueado_1">Buscar</button>
+                       <button *ngIf="!articuloSeleccionado" matSuffix mat-raised-button color="primary" data-toggle="modal" [attr.data-target]="'#frmarticulo' + Instancia" [disabled]="bloqueado_1">Buscar</button>
+                  </mat-form-field>
+               </div>
+               <div class="col-md-6 col-lg-6">
+                   <mat-form-field class="example-full-width">
+                       <input matInput [(ngModel)]="Descripcion" (keyup)="actualizarDescripcion(txtDescripcion.value)" #txtDescripcion name="txtDescripcion" placeholder="Descripcion Articulo" [disabled]="bloqueado_1">
+                   </mat-form-field>
+               </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div [attr.id]="'frmarticulo'+ Instancia" class="modal fade" role="dialog">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="frmbusqueda"></h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="idmenu" value="">
+            <form class="form-horizontal">
+                <div class="box-body">
+                    <div class="form-group" id="formularionuevosubmenu">
+                        <label><b>Buscar:</b></label>
+                        <input class="form-control" placeholder="Escribe aqui lo que desees Buscar" id="txtBuscaArticulo" type="text" name="txtBuscaArticulo" (keyup)="filtrar($event)" 
+                        [(ngModel)]="filtro"/>
+                        <div id="gridarticulo">
+                          <kendo-grid 
+                          [data]="vistaGrid" 
+                          [height]="400"
+                          [pageable]="true"
+                          [pageSize]="pageSize"
+                          [skip]="skip"
+                          [filter]="state.filter"
+                          (pageChange)="pageChange($event)"
+                          >
+                          <kendo-grid-column field="cat_parte" title="Parte" width="120px">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="cat_parte_desc" title="Descripcion" width="160px">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="cat_um" title="UM" width="40px">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="cat_status" title="Status" width="80px">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="cat_inventariable" title="Inv" width="40px">
+                          </kendo-grid-column>
+                   <!--   <kendo-grid-column field="cat_cuenta" title="Cuenta" width="60px">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="cat_subcuenta" title="Subcuenta" width="60px">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="cat_cc" title="CC" width="60px">
+                          </kendo-grid-column> -->
+                          <kendo-grid-command-column title="Acciones" width="110">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <button class="k-primary" (click)="seleccionarArticulo(dataItem)" data-dismiss="modal">Seleccionar</button>
+                            </ng-template>
+                          </kendo-grid-command-column>
+                          </kendo-grid>       
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
+</div>

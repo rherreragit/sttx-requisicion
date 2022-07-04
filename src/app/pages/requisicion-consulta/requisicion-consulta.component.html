@@ -1,0 +1,173 @@
+<div class="main-content">
+  <div class="content-wrapper container-fluid principal">
+    <h3 class="box-title sttx-boldfont">Requisicion Consulta</h3>
+    <div id="formulario">
+      <form class="form-horizontal" role="form">
+        <!-- Seccion 1 -->
+        <div id= "Seccion_1" class="row">
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                <mat-form-field class="example-full-width">
+                 <input matInput 
+                        [(ngModel)]="Req_number" 
+                        type="text"
+                        name="txtRequisicion"                 
+                        placeholder="Requisicion"
+                        (blur)="formatear()"
+                        myNumberOnly
+                        (keypress)="keyPressNumbers($event)"
+                        [maxlength]="8"
+                        (click)="$event.target.select()">
+                  <button id="btn-buscar"  matSuffix mat-raised-button color="primary" (click)='Buscar_Req()'>Buscar</button>
+                 </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+              </div>
+            </div>
+          </div>         
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                </div>
+              </div>
+            </div>
+          <div class="col-sm-12 col-md-6 col-lg-2">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!--  Inicia Grid Encabezado -->
+          <div id="formularioEncabezado" class="grid" *ngIf='!oculto_1'>
+            <div class="row">
+              <h4 class="titleGrid">Requisicion</h4>
+              <kendo-grid [data]="gridDataEnc" style="height: 100px; width:100%;"  [ngClass]="{'k-state-disabled': bloqueado }">
+                <kendo-grid-column field="reqm_entidad" title="Entidad" width="60px">
+                </kendo-grid-column>               
+                <kendo-grid-column field="reqm_proveedor" title="Proveedor" width="70px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_name" title="Nombre" width="220px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_descripcion" title="Descripcion" width="260">
+                </kendo-grid-column>                               
+                <kendo-grid-column field="reqm_total" title="Total" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_moneda" title="Moneda" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_status" title="Status" width="80px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_usuario" title="Usuario" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_fecha" title="Fecha" width="70px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_hora" title="Hora" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqm_oc" title="OC" width="60px">
+                </kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </div>
+          <!-- Termina Grid -->
+          <br> <br>
+
+          <!--  Inicia Grid Detalle -->
+          <div id="formularioDetalle" class="grid" *ngIf='!oculto_1'>
+            <div class="row">
+              <h4 class="titleGrid">Detalle</h4>
+              <kendo-grid [data]="gridDataDet" style="height: 280px; width:100%;"  [ngClass]="{'k-state-disabled': bloqueado }">
+                <kendo-grid-column field="reqd_parte" title="Parte" width="80px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_parte_desc" title="Descripcion" width="260">
+                </kendo-grid-column>               
+                <kendo-grid-column field="reqd_cuenta" title="Cuenta" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_subcuenta" title="SubCuenta" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_cc" title="CC" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_cantidad" title="Cantidad" width="40px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_um" title="UM" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_precio" title="Precio" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_total" title="Total" width="60px">
+                </kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </div>
+          <!-- Termina Grid -->
+
+          <form class="form-horizontal" role="form" *ngIf='!oculto_1'>
+            <div class="row"> 
+              <div class="col-sm-12 col-md-6 col-lg-2">                 
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-5">               
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-1">
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                  <div class="col-md-12 col-lg-12">
+
+                        <!--  Inicia Grid Impuestos -->
+                        <div id="formularioImpuestos" class="grid" *ngIf='!oculto_1'>
+                          <div class="row">
+                            <h4 class="titleGrid">Impuestos</h4>
+                            <kendo-grid [data]="gridDataImp" [hideHeader]="true" [ngClass]="{'k-state-disabled': bloqueado }">
+                              <kendo-grid-column field="reqi_etiqueta" title="Etiqueta" width="120px">
+                              </kendo-grid-column>
+                              <kendo-grid-column field="reqi_total" title="Total" width="80">
+                              </kendo-grid-column>
+                            </kendo-grid>
+                          </div>
+                        </div>
+                        <!-- Termina Grid -->
+
+                  </div>
+                </div>
+              </div>
+      
+            </div>
+          </form>
+
+          <br> <br>
+
+          <!--  Inicia Grid Aprobadores -->
+          <div id="formularioDetalle" class="grid" *ngIf='!oculto_1'>
+            <div class="row">
+              <h4 class="titleGrid">Aprobadores</h4>
+              <kendo-grid [data]="gridDataApr" style="height: 280px; width:100%;"  [ngClass]="{'k-state-disabled': bloqueado }">
+                <kendo-grid-column field="reqa_nivel" title="Nivel" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqa_usuario" title="Usuario" width="80">
+                </kendo-grid-column>               
+                <kendo-grid-column field="reqa_monto" title="Monto" width="80px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqa_moneda" title="Moneda" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqa_status" title="Status" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqa_comentario" title="Comentario" width="220px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqa_fecha" title="Fecha" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqa_hora" title="Hora" width="60px">
+                </kendo-grid-column>              
+              </kendo-grid>
+            </div>
+          </div>
+           <!-- Termina Grid -->
+
+          
+      </form>
+    </div>
+  </div>
+</div>

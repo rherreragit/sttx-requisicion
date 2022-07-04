@@ -1,0 +1,235 @@
+<div class="main-content">
+  <div class="content-wrapper container-fluid principal">
+    <h3 class="box-title sttx-boldfont">Requisicion Alta</h3>
+    <div id="formulario">
+      <form class="form-horizontal" role="form">
+        <!-- Seccion 1 -->
+        <div id= "Seccion_1" class="row">
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                <mat-form-field class="example-full-width">
+                 <input matInput 
+                        [(ngModel)]="Req_number" 
+                        type="text"
+                        name="txtRequisicion"                 
+                        placeholder="Requisicion"
+                        (blur)="formatear()"
+                        myNumberOnly
+                        (keypress)="keyPressNumbers($event)"
+                        [maxlength]="8"
+                        (click)="$event.target.select()">
+                  <button id="btn-buscar"  matSuffix mat-raised-button color="primary" (click)='Buscar_Req()'>Buscar</button>
+                 </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput [(ngModel)]="Req_Desc" name="txtReq_Desc" placeholder="Descripcion General" [disabled]="bloqueado_2">
+                 </mat-form-field>
+              </div>
+            </div>
+          </div>         
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                  <div class="alinea">
+                  <app-busqueda-entidad (entidad)="entidadSelect($event)"  [EntidadSeleccionada]="Entidad_Seleccionada" [Bloqueado]="bloqueado_2">
+                  </app-busqueda-entidad>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="col-sm-12 col-md-6 col-lg-2">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput [(ngModel)]="Req_Status" name="txtReq_Status" placeholder="Status" [disabled]="bloqueado_1">
+                 </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Seccion 2 -->
+        <div id= "Seccion_2" class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                <app-busqueda-proveedor (proveedor)="obtenerProveedor($event)" [ProveedorSeleccionado]="Proveedor_Seleccionado" [Instancia]="1" [Bloqueado]="bloqueado_2">
+                </app-busqueda-proveedor>
+              </div>
+            </div>
+          </div>        
+        </div>
+        <!-- Seccion 3 -->
+        <div id= "Seccion_3" class="row">      
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                <div class="alinea">
+                <app-busqueda-articulo *ngIf="comparticulo" (articulo)="obtenerArticulo($event)" [articuloSeleccionado]="Parte_Seleccionada" [Instancia]="2"  [Bloqueado]="bloqueado_2">
+                </app-busqueda-articulo>
+                </div> 
+              </div>         
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-2">
+            <div class="form-group">
+              <div class="row">
+                  <div class="col-md-12 col-lg-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput 
+                         [(ngModel)]="Req_Cantidad" 
+                         type="number"                                                                
+                         name="txtReq_Cantidad" 
+                         (keypress)="keyPressNumbersWithDecimal($event)"
+                         placeholder="Cantidad"                         
+                         (click)="$event.target.select()" [disabled]="bloqueado_2">
+                    </mat-form-field>  
+                  </div>
+                  <div class="col-md-12 col-lg-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput [(ngModel)]="Req_UM" name="txtReq_UM" placeholder="UM" [disabled]="bloqueado_1">
+                    </mat-form-field>
+                  </div>                
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                      <mat-form-field class="example-full-width">
+                        <input matInput 
+                            [(ngModel)]="Req_Precio" 
+                            type="number"
+                            name="txtReq_Precio" 
+                            (keypress)="keyPressNumbersWithDecimal($event)"
+                            placeholder="Precio"
+                            (click)="$event.target.select()" [disabled]="bloqueado_2">
+                      </mat-form-field>  
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                      <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="Req_Moneda" name="txtReq_Moneda" placeholder="Moneda" [disabled]="bloqueado_1">
+                      </mat-form-field>
+                    </div>                
+                </div> 
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group"> 
+                <div class="col-md-12 col-lg-6">
+                  <button id="btn-agregar" matSuffix mat-raised-button color="primary" (click)='Agregar()' [disabled]="bloqueado_2">Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!--  Inicia Grid -->
+          <div id="formularioRequisicion" class="grid" *ngIf='!oculto_1'>
+            <div class="row">
+              <h4 class="titleGrid">Detalle</h4>
+              <kendo-grid [data]="gridData" style="height: 280px; width:100%;" [rowClass]="rowCallback" 
+              (cellClick)="cellClickHandlerDetalle($event)" 
+              (cellClose)="cellCloseHandlerDetalle($event)"
+              [ngClass]="{'k-state-disabled': bloqueado_2 }">
+                <kendo-grid-command-column title="Acciones" width="80">
+                 <ng-template kendoGridCellTemplate let-rowIndex="rowIndex" let-dataItem>
+                      <button class="k-icon k-i-delete" (click)="Eliminar(rowIndex,dataItem)"
+                          data-dismiss="modal"></button>
+                  </ng-template>
+                </kendo-grid-command-column> 
+                <kendo-grid-column field="reqd_parte" title="Parte" width="80px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_parte_desc" title="Descripcion" width="260">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                     {{dataItem.reqd_parte_desc }} 
+                  </ng-template> 
+                </kendo-grid-column>               
+                <kendo-grid-column field="reqd_cuenta" title="Cuenta" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_subcuenta" title="SubCuenta" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_cc" title="CC" width="60px">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.reqd_cc }} 
+                  </ng-template>               
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_cantidad" title="Cantidad" width="40px">
+                  <ng-template kendoGridCellTemplate let-dataItem myNumberOnly>
+                     {{dataItem.reqd_cantidad | number: '1.1-4' }} 
+                   </ng-template>                        
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_um" title="UM" width="60px">
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_precio" title="Precio" width="60px">
+                  <ng-template kendoGridCellTemplate let-dataItem myNumberOnly>
+                    {{dataItem.reqd_precio | number: '1.1-4' }} 
+                  </ng-template>                  
+                </kendo-grid-column>
+                <kendo-grid-column field="reqd_total" title="Total" width="60px">
+                </kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </div>
+          <!-- Termina Grid -->
+
+          <form class="form-horizontal" role="form" *ngIf='!oculto_1'>
+            <div class="row"> 
+              <div class="col-sm-12 col-md-6 col-lg-2">
+                  <button id="btn-guardar" class="button" matSuffix mat-raised-button color="primary" (click)='Guardar()' [disabled]="bloqueado_2">Guardar</button>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-5">               
+                <div id="Errores" *ngIf='!oculto_2'>
+                  <mat-form-field class="example-full-width">
+                    <input id="color" matInput [(ngModel)]="Diferencias" name="txtDiferencias"
+                            placeholder="Errores">
+                   </mat-form-field>
+                 </div>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-1">
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                  <div class="col-md-12 col-lg-12">
+
+                            <!--  Inicia Grid Impuestos-->
+                            <div id="formularioImpuestos" class="grid" *ngIf='!oculto_1'>
+                              <div class="row">
+                                <h4 class="titleGrid">Impuestos</h4>
+                                  <kendo-grid [data]="gridDataImp" [hideHeader]="true" [ngClass]="{'k-state-disabled': bloqueado_2 }">
+                             <!-- <kendo-grid-column field="reqi_nivel" title="Nivel" width="40px">
+                                  </kendo-grid-column> -->
+                                  <kendo-grid-column field="reqi_etiqueta" title="Etiqueta" width="120px">
+                                  </kendo-grid-column>                                 
+                             <!-- <kendo-grid-column field="reqi_factor" title="Factor" width="80px">
+                                  </kendo-grid-column> 
+                                  <kendo-grid-column field="reqi_monto" title="Monto" width="80px">
+                                  </kendo-grid-column> -->
+                                  <kendo-grid-column field="reqi_total" title="Total" width="80px">
+                                  </kendo-grid-column>
+                                </kendo-grid>
+                              </div>
+                            </div>
+                            <!-- Termina Grid Impuestos -->
+
+                  </div>
+                </div>
+              </div>
+      
+            </div>
+          </form>
+
+
+
+          
+      </form>
+    </div>
+  </div>
+</div>

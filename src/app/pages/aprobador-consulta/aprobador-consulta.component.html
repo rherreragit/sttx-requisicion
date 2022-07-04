@@ -1,0 +1,45 @@
+<div class="main-content">
+  <div class="content-wrapper container-fluid principal">
+    <h3 class="box-title sttx-boldfont">Aprobador Consulta</h3>
+    <div id="formulario">
+      <form class="form-horizontal" role="form">
+        <div class="row" [hidden]='oculto_1'>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                  <app-busqueda-entidad (entidad)="entidadSelect($event)">
+                  </app-busqueda-entidad>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+    </div>
+
+    <!--  Inicia Grid -->
+    <div id="formularioCatalogo" class="grid" *ngIf='!oculto_2'>
+      <div class="row">
+        <kendo-grid [data]="gridData" style="height: 280px; width:100%;">
+          <kendo-grid-column field="apr_nivel" title="Nivel" width="80px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_usuario" title="Aprobador" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_monto_mn" title="Monto MN" width="120px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_monto_usd" title="Monto USD" width="120px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_tc" title="Tipo Cambio" width="80px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_apr_usuario" title="Usuario" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_apr_fecha" title="Fecha" width="60px" format="dd/MM/yy">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_apr_hora" title="Hora" width="60px" format="HH:MM:SS">
+          </kendo-grid-column>
+        </kendo-grid>
+      </div>
+    </div>
+     <!-- Termina Grid -->
+    
+  </div>
+</div>

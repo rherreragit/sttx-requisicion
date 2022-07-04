@@ -1,0 +1,123 @@
+<div class="main-content">
+  <div class="content-wrapper container-fluid principal">
+    <h3 class="box-title sttx-boldfont">Catalogo Alta</h3>
+    <div id="formulario">
+      <form class="form-horizontal" role="form">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+
+                <app-busqueda-parte (parte)="obtenerParte1($event)" *ngIf="LnProd_Filtro.length > 0" [parteSeleccionada]="parte1.parte_int" [Instancia]="1"
+                  [LnProd_Filtro]="LnProd_Filtro">
+                </app-busqueda-parte>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+
+                <app-busqueda-parte (parte)="obtenerParte2($event)" *ngIf="LnProd_Filtro.length > 0"
+                  [parteSeleccionada]="parte2.parte_int" [Instancia]="2" [LnProd_Filtro]="LnProd_Filtro">
+                </app-busqueda-parte>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+
+                <app-busqueda-lnprod (lnprod)="obtenerLnprod($event)" [lnprodSeleccionada]="lnprod.lnprod_codigo"
+                  [Instancia2]="3">
+                </app-busqueda-lnprod>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-1">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+
+                <button class="button" matSuffix mat-raised-button color="primary" (click)='Generar()'>Generar</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+    <!--  Inicia Grid -->
+    <div id="formularioCatalogo" class="grid" *ngIf='!oculto_1'>
+      <div class="row">
+        <kendo-grid [data]="gridData" style="height: 280px; width:100%;" [rowClass]="rowCallback"
+          (cellClick)="cellClickHandlerErrors($event)"
+          [selectable]="{checkboxOnly: true}"
+          [rowSelected]="isRowSelected">
+          <kendo-grid-column field="cat_parte" title="Parte" width="80px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_parte_desc" title="Descripcion" width="160px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_um" title="UM" width="40px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_lnprod" title="Ln Prod" width="40px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_status" title="Status" width="80px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_inventariable" title="Inv" width="40px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_cuenta" title="Cuenta" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_subcuenta" title="Subcuenta" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_cc" title="CC" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_usuario" title="Usuario" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_fecha" title="Fecha" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="cat_hora" title="Hora" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="Activo" title="Sel" width="40">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <input type="checkbox"[(ngModel)]="dataItem.Activo"/>
+            </ng-template>
+        </kendo-grid-column>
+    
+        </kendo-grid>
+      </div>
+    </div>
+    <!-- Termina Grid -->
+    
+    <form class="form-horizontal" role="form" *ngIf='!oculto_1'>
+      <div class="row"> 
+        <div class="col-sm-12 col-md-6 col-lg-3">
+           <div *ngIf='!oculto_2'>
+            <mat-form-field class="example-full-width">
+              <input matInput [(ngModel)]="Diferencias" name="txtDiferencias"
+                      placeholder="Diferencias">
+             </mat-form-field>
+           </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-1">
+          <div class="form-group">
+            <div class="col-md-12 col-lg-12">
+              <button class="button" matSuffix mat-raised-button color="primary" (click)='Aceptar()'>Aceptar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+
+  </div>
+</div>

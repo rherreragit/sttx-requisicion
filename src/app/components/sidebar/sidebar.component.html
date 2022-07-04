@@ -1,0 +1,37 @@
+
+<div class="logo">
+    <nav class="navbar navbar-dark bg-red">
+        <button class="navbar-toggler toggled !Important" type="button" mat-raised-button data-toggle="collapse"
+        (click)="ocultarMenu()">  
+
+       <table class="egt">
+        <tr>     
+          <td>               
+            <a href="{{obtenerAmbiente()}}" class="simple-text">
+                <i class="material-icons">keyboard_arrow_left</i> web-sttx        
+            </a>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td>
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </td>
+        </tr>
+      </table>
+        </button>     
+      </nav>
+</div>
+
+
+<div class="sidebar-wrapper">
+      <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+</div>

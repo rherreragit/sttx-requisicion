@@ -1,0 +1,44 @@
+.example-full-width {
+    width: 100%;
+  }
+
+.principal {
+    margin-top: -90px;
+  }
+
+  .sttx-boldfont {
+     text-align: center;
+  }
+
+  .content-wrapper {
+    margin-left: 5px;
+    
+  }
+
+  .button {
+    top: 12px;
+    left: 150px;
+  }
+  
+
+  .alta {    
+    padding-left: 16px;
+    left: 25px 
+  }
+  
+  .grid {
+    margin-right: 40px;
+    margin-left: 30px;
+  }
+
+  .alinea {
+    margin-left: 15px;
+  }
+
+  .k-icon {
+    font-size: 28px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+}

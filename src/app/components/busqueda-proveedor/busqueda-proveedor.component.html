@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-12">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4 col-lg-6">
+                    <mat-form-field class="inputProveedor">
+                         <input matInput [(ngModel)]="proveedorSelected" placeholder="Proveedor" name="txtProveeedor" [disabled]="bloqueado_2">                         
+                         <button matSuffix mat-raised-button color="primary" data-toggle="modal" [attr.data-target]="'#frmproveedor' + Instancia"  [disabled]="bloqueado_1">Buscar</button>   
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-6 col-lg-6">
+                     <mat-form-field class="example-full-width">
+                         <input matInput [(ngModel)]="Nombre" name="txtNombre" placeholder="Nombre" [disabled]="bloqueado_2">
+                     </mat-form-field>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [attr.id]="'frmproveedor'+ Instancia" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title" id="frmbusqueda"></h4>
+          </div>
+          <div class="modal-body">
+              <input type="hidden" id="idmenu" value="">
+              <form class="form-horizontal">
+                  <div class="box-body">
+                      <div class="form-group" id="formularionuevosubmenu">
+                          <label><b>Buscar:</b></label>
+                          <input class="form-control" placeholder="Escribe aqui lo que desees Buscar" id="txtBuscaProveedor" type="text" name="txtBuscaProveedor" (keyup)="filtrar($event)" 
+                          [(ngModel)]="filtro"/>
+                          <div id="gridproveedor">
+                            <kendo-grid 
+                            [data]="vistaGrid" 
+                            [height]="400"
+                            [pageable]="true"
+                            [pageSize]="pageSize"
+                            [skip]="skip"
+                            [filter]="state.filter"
+                            (pageChange)="pageChange($event)"
+                            >
+                                <kendo-grid-column field="proveedor" title="Codigo" width="80">
+                                </kendo-grid-column>
+                                <kendo-grid-column field="nombre" title="Nombre">
+                                </kendo-grid-column>
+                                <kendo-grid-command-column title="Acciones" width="110">
+                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                        <button class="k-primary" (click)="seleccionarProveedor(dataItem)" data-dismiss="modal">Seleccionar</button>
+                                    </ng-template>
+                                </kendo-grid-command-column>
+                            </kendo-grid>       
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+  </div>
+</div>

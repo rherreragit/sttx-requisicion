@@ -1,0 +1,31 @@
+.example-full-width {
+    width: 100%;
+  }
+
+.principal {
+    margin-top: -90px;
+  }
+
+  .sttx-boldfont {
+     text-align: center;
+  }
+
+  .content-wrapper {
+    margin-left: 5px;
+    
+  }
+
+  .button {
+    top: 12px;
+    left: 150px;
+  }
+  
+
+  .grid {
+    margin-right: 40px;
+    margin-left: 30px;
+  }
+
+  .alinea {
+    margin-left: 15px;
+  }

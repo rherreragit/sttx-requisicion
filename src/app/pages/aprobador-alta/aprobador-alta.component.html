@@ -1,0 +1,150 @@
+<div class="main-content">
+  <div class="content-wrapper container-fluid principal">
+    <h3 class="box-title sttx-boldfont">Aprobador Alta</h3>
+    <div id="formulario">
+      <form class="form-horizontal" role="form">
+        <div class="row" [hidden]='oculto_1'>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <div class="col-md-12 col-lg-12">
+                  <app-busqueda-entidad (entidad)="entidadSelect($event)">
+                  </app-busqueda-entidad>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alinea">
+          <div class="row" [hidden]='oculto_2'>
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="Usuario" name="txtUsuario" placeholder="Usuario"
+                        [disabled]="bloqueado_1">
+                    </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                  <mat-form-field class="example-full-width">
+                        <input matInput 
+                        [(ngModel)]="Monto_MN" 
+                        type="number"
+                        (focus)="tempValue = Monto_MN"
+                        (focusout)="ConvierteUSD()"
+                        name="txtMonto_MN" 
+                        (keyup)="ConvierteUSD()"
+                        placeholder="Monto MN"
+                        pattern="^\d*(\.\d{0,2})?$"
+                        [disabled]="bloqueado_1">
+                    </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                    <mat-form-field class="example-full-width">
+                      <input matInput 
+                      [(ngModel)]="Monto_USD" 
+                      type="number"
+                      (focus)="tempValue = Monto_USD"
+                      (focusout)="ConvierteMN()"
+                      name="txtMonto_USD" 
+                      (keyup)="ConvierteMN()"
+                      placeholder="Monto USD"
+                      pattern="^\d*(\.\d{0,2})?$"
+                      [disabled]="bloqueado_1">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="TipoCambio" name="txtTipoCambio" placeholder="Tipo Cambio" type="number"
+                        [disabled]="bloqueado_2">
+                      </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <div class="form-group">
+                <div class="col-md-12 col-lg-12">
+                  <button class="alta" matSuffix mat-raised-button
+                          color="primary" (click)='Agregar()'>Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    </form>
+    </div>
+
+
+
+    <!--  Inicia Grid -->
+    <div id="formularioCatalogo" class="grid" *ngIf='!oculto_2'>
+      <div class="row">
+        <kendo-grid [data]="gridData" style="height: 280px; width:100%;">
+          <kendo-grid-column field="apr_nivel" title="Nivel" width="80px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_usuario" title="Aprobador" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_monto_mn" title="Monto MN" width="120px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_monto_usd" title="Monto USD" width="120px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_tc" title="Tipo Cambio" width="80px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_apr_usuario" title="Usuario" width="60px">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_apr_fecha" title="Fecha" width="60px" format="dd/MM/yy">
+          </kendo-grid-column>
+          <kendo-grid-column field="apr_apr_hora" title="Hora" width="60px" format="HH:MM:SS">
+          </kendo-grid-column>
+          <kendo-grid-command-column title="Acciones" width="80">
+            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex" let-dataItem>
+                <button class="k-icon k-i-delete" (click)="Eliminar(rowIndex,dataItem)"
+                    data-dismiss="modal"></button>
+            </ng-template>
+          </kendo-grid-command-column> 
+        </kendo-grid>
+      </div>
+    </div>
+     <!-- Termina Grid -->
+    
+    <form class="form-horizontal" role="form" *ngIf='!oculto_2'>
+      <div class="row"> 
+        <div class="col-sm-12 col-md-6 col-lg-3">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-1">
+          <div class="form-group">
+            <div class="col-md-12 col-lg-12">
+              <button class="button" matSuffix mat-raised-button color="primary" (click)='Guardar()'>Guardar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+
+  </div>
+</div>
