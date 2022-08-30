@@ -16,6 +16,7 @@ import { AprobadorConsultaComponent } from '../../pages/aprobador-consulta/aprob
 import { RequisicionAltaComponent } from '../../pages/requisicion-alta/requisicion-alta.component';
 import { RequisicionConsultaComponent } from '../../pages/requisicion-consulta/requisicion-consulta.component';
 import { RequisicionAprobacionComponent } from '../../pages/requisicion-aprobacion/requisicion-aprobacion.component';
+import { RequisicionOcComponent } from '../../pages/requisicion-oc/requisicion-oc.component';
 
 //Servicios
 import { AccesoService } from '../../services/acceso.service';
@@ -80,6 +81,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
     RequisicionAltaComponent,
     RequisicionConsultaComponent,
     RequisicionAprobacionComponent,
+    RequisicionOcComponent,
     ThousandsPipe,
     NumberOnlyDirective
   ],

@@ -13,6 +13,7 @@ import { RowClassArgs } from '@progress/kendo-angular-grid';
 import { from } from 'rxjs';
 import { stringify } from 'querystring';
 import { IntlService } from '@progress/kendo-angular-intl';
+import { response } from 'express';
 
 @Component({
   selector: 'app-requisicion-aprobacion',
@@ -63,19 +64,19 @@ export class RequisicionAprobacionComponent implements OnInit {
     this.limpia_grids();
     this.limpia_detalle();
           // Seccion para cargar las Requisiciones Pendientes
-          this._RequisicionService.pendientesRequisicion(entidadSelected).subscribe(
-            response => {
+          this._RequisicionService.pendientesRequisicion(entidadSelected).subscribe({
+           next:(response) => {
+              this.llena_encabezado(response);             
+              this.oculto_2 = false;
+              this.oculto_3 = true;            
+           },
+           error:(response) => {
+            console.error("Ocurrio un error");
+           }
 
-             this.llena_encabezado(response);             
-             this.oculto_2 = false;
-             this.oculto_3 = true;
-
-            }, error => {
-              console.error("Ocurrio un error");
-            }
-        
-          );  
+          });  
   }
+
 
   llena_encabezado(response){
 

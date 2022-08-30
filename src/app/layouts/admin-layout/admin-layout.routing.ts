@@ -11,6 +11,7 @@ import { AprobadorConsultaComponent } from '../../pages/aprobador-consulta/aprob
 import { RequisicionAltaComponent } from '../../pages/requisicion-alta/requisicion-alta.component';
 import { RequisicionConsultaComponent } from '../../pages/requisicion-consulta/requisicion-consulta.component';
 import { RequisicionAprobacionComponent } from '../../pages/requisicion-aprobacion/requisicion-aprobacion.component';
+import { RequisicionOcComponent } from '../../pages/requisicion-oc/requisicion-oc.component';
 
 //Guards
 import {PermisoGuard} from '../../guards/permiso.guard';
@@ -26,5 +27,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'RequisicionAlta', component: RequisicionAltaComponent, canActivate:[PermisoGuard] },
     { path: 'RequisicionConsulta', component: RequisicionConsultaComponent, canActivate:[PermisoGuard] },
     { path: 'RequisicionAprobacion', component: RequisicionAprobacionComponent, canActivate:[PermisoGuard] },
+    { path: 'RequisicionOC', component: RequisicionOcComponent, canActivate:[PermisoGuard] },
     { path: '**', component: nopathComponent },  
 ];

@@ -1,0 +1,34 @@
+.example-full-width {
+    width: 100%;
+  }
+
+.principal {
+    margin-top: -90px;
+  }
+
+  .sttx-boldfont {
+     text-align: center;
+  }
+
+  .content-wrapper {
+    margin-left: 5px;
+    
+  }
+
+  .button {
+    top: 12px;
+    left: 25px;
+  }
+  
+
+  .grid {
+    margin-right: 10px;
+    margin-left: 40px;
+  }
+
+  .titleGrid {
+    width: 100%;
+    background-color:#3f51b5;
+    color: white;
+    text-align: center;
+   } 
