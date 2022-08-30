@@ -61,10 +61,11 @@ export class RequisicionAprobacionComponent implements OnInit {
   entidadSelect(entidadSelected){
     this.Entidad = entidadSelected;
     this.limpia_grids();
+    this.limpia_detalle();
           // Seccion para cargar las Requisiciones Pendientes
           this._RequisicionService.pendientesRequisicion(entidadSelected).subscribe(
             response => {
-              console.log(response);
+
              this.llena_encabezado(response);             
              this.oculto_2 = false;
              this.oculto_3 = true;
@@ -243,18 +244,51 @@ Aprobar(){
     confirmButtonText: 'Aceptar',
     cancelButtonText: 'Cancelar'
   }).then((result) => {
-    if (result.value) {
-      console.log(result);
-      //this.setrequisicion(this.gridData, "AUTHORIZE");
-    } else {
-      console.log(result);
-      //this.setrequisicion(this.gridData, "SAVE");
-    }
+      if (result.isConfirmed) { 
+      
+      this._RequisicionService.autorizaRequisicion(this.gridDataDet[0].reqd_requisicion,result.value,"APROBADO").subscribe(
+        response => {
+            this.entidadSelect(this.Entidad);
+        }, error => {
+          console.error("Ocurrio un error");
+        }    
+      );          
+      
+      }     
+
   })
 
 }
 
 Denegar(){
+
+  swal.fire({
+    title: '¿Desea Denegar la Requisicion?',
+    text: "Comentarios",
+    input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+   // icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#adb0a5',
+    cancelButtonColor: '#DD6B55',
+    confirmButtonText: 'Aceptar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+      if (result.isConfirmed) { 
+      
+      this._RequisicionService.autorizaRequisicion(this.gridDataDet[0].reqd_requisicion,result.value,"DENEGADO").subscribe(
+        response => {
+            this.entidadSelect(this.Entidad);
+        }, error => {
+          console.error("Ocurrio un error");
+        }    
+      );          
+      
+      }     
+
+  })  
 
 }
 

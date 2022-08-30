@@ -103,5 +103,28 @@ export class RequisicionService{
             //Realizar la peticion AJAX
             return this._http.get(this.url+params, {headers: headers}); 
         }
+      
+
+        autorizaRequisicion(iRequisition:string,iComentario:string,iAction:string): Observable<any> {
+            //Definir Cabezeras de la peticion AJAX
+            let headers = new HttpHeaders();
+            headers.append('Access-Control-Request-Headers', '*');
+            headers.append('content-type', 'application/json');
+            //Obtener Sesion de Usuario
+            let user: User = this._userService.obtenerusuario();
+            //Armar URL
+            let API = '/requisiciones/requisicion.php';
+            //Enviar Parametros
+            let params = new FormData();
+            params.append('dominio', user.dominio);
+            params.append('Requi', iRequisition);
+            params.append('usuario', user.userid);
+            params.append('comentario', iComentario);
+            params.append('action', iAction);
+
+            //Realizar la peticion AJAX
+            return this._http.post(this.url + API, params, { headers: headers });
+            } 
+
 
 }
